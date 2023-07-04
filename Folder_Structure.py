@@ -1,149 +1,126 @@
+from DoubleLinkedList import DLinkedList 
 import os
-from DoubleLinkedList import DLinkedList as DL
-from DoubleLinkedList import DLinkedListNode as DN
-import BinaryTree as BT
-#TODO: issue: terrible search / sort
-#asdf
+
 class Folder:
+    def __init__(self, root_path:str) -> None:
+        self.__root = root_path 
 
-    def __init__(self, root_path) -> None:
-        
-        ### components of a folder at a particular level
-        self.__path = root_path
-        if root_path != 'None':
-            self.__folder = DL()
-            self.__file = DL()
-    
-    def get_root(self):
-        return self.__path
-    
-    def get_folders(self) -> DL:
-        return self.__folder
-    
-    def get_files(self) -> DL:
-        return self.__file
+        self.__folder = DLinkedList() # container type: folder
+        self.__file = DLinkedList() # container type: folder
 
-# In order for folder_structure to be complete, folder_hierachy() is required
-class Folder_Structure():
-    def __init__(self, root_path) :
-        self.__root = Folder(root_path)
-        self.__folder = self.__root.get_folders()
-        self.__files = self.__root.get_files()
-
-        # this loop is processed at 1 level down of the root_path
-        for root, directories, files in os.walk(root_path):  
-            #print(root_path)
-            ### adding folder
-            if len(directories) == 0:
-                self.__folder.add(Folder(f"Folder None"))
-            else:
-                for items in directories:
-                    self.__folder.add(Folder(f"{root}\\{items}"))
-
-            ### adding files
-            if len(files) == 0:
-                self.__files.add(Folder(f"File None"))
-            else:
-                for items in files:
-                    self.__files.add(Folder(f"{root}\\{items}"))
-
-            break
-    def get_root_path(self) -> str:
-        return self.__root.get_root()
-    
-    def get_root(self) -> Folder:
+    def get_root(self) -> str:
         return self.__root
     
-    def get_folders(self) -> DL:
+    def get_file(self) -> DLinkedList:
         return self.__folder
     
-    def get_files(self) -> DL:
-        return self.__files
+    def get_folder(self) -> DLinkedList:
+        return self.__file
 
-    def get_folder_str(self):
-        temp_str = ''
-        for i in range(self.__folder.getSize()):
-            if self.__folder.getItem(i).get_root() == 'Folder None':###
-    
-                temp_str += "None\n"
-            else:
-                temp_str += self.__folder.getItem(i).get_root() + "\n"
+    def remove_from_folder(self, root_path:str):
+        pass
 
-        return temp_str
+    def remove_from_file(self, root_path:str):
+        pass
     
-    def get_file_str(self):
-        temp_str = ''
-        for i in range(self.__files.getSize()):
         
-            if self.__files.getItem(i).get_root() == 'File None':###
-                temp_str += "None\n"
-            else:
-                temp_str += self.__files.getItem(i).get_root() + "\n"
-        return temp_str
-    
-    def search_helpe(self, index, search_type:str) -> Folder:
-        if search_type == "folder":
-            return self.__folder.getItem(index)
-        elif search_type == "file":
-            return self.__files.getItem(index)
-    
 
-    def search_folder(self, item_path) -> Folder:
+    def __str__(self):
+        tempStr = ''
         for i in range(self.__folder.getSize()):
-            next_folder_path = self.search_helper_item(i).get_root()
-            if next_folder_path == item_path:
-                return next_folder_path
+            tempStr += self.__folder.getItem(i) + "\n"
+        return tempStr
+
+class Folder_Management:
+
+    def __init__(self) -> None:
+        self.__None = None
+
+    def initailize (self, folder:Folder):
+        root_path = folder.get_root()
+        self.add_to_folder(root_path, folder)
+        # self.add_to_file(root_path, folder) -> this is called in add_to_folder()
+    
+    def add_to_folder (self, root_path:str, folder:Folder):
+        self.add_to_file(root_path, folder)
+        if self.sub_folder_exist(root_path):
+            for root, directories, files in os.walk(root_path):
+                for items in directories:
+                    sub_path = f"{root_path}\\{items}"
+                    new_folder = Folder(sub_path)
+                    folder.get_folder().add(new_folder)
+                    self.add_to_folder(sub_path, new_folder)
+                    
+                break
+
+        else:
+            new_folder = Folder("no any other folder")
+            folder.get_folder().add(new_folder)
+            
+            
+
+    def add_to_file(self, root_path:str, folder:Folder):
+        #print(self.sub_file_exist(root_path))
+        if self.sub_file_exist(root_path):
+            for root, directories, files in os.walk(root_path):
+                for items in files:
+                    sub_path = f"{root_path}\\{items}"
+                    new_folder = Folder(sub_path)
+                    folder.get_file().add(new_folder)
+                break        
+        else:
+            new_folder = Folder("no any other files")
+            folder.get_file().add(new_folder)
+            
+    def sub_folder_exist(self, root_path:str) -> bool:
+            '''
+            check if there is any extra folder under the current directory
+            '''
+            for root, directories, files in os.walk(root_path): 
+
+                # adding folders
+                if len(directories) == 0:
+                    return False
+            
+                else:
+                    return True
+                
+                break
+
+    def sub_file_exist(self, root_path:str) -> bool:
+        '''
+        check if there is extra any file under the current directory
+        '''
+        for root, directories, files in os.walk(root_path): 
+
+            # adding folders
+            if len(files) == 0:
+                return False
+            
             else:
-                return "unable to find the desired folder -> possible error: folder doesnt exist/other error"
+                return True
 
-    def search_file(self, item_path):
-        for i in range(self.__files.getSize()):
-            next_folder_path = self.search_helper_item(i,"file").get_root()
-            if next_folder_path == item_path:
-                return next_folder_path
-            else:
-                return "unable to find the desired file-> possible error: folder doesnt exist/other error"
+            break
 
-    #TODO:possible error for inserting item_path
-    def add_required_file(self, item_path):
-        self.__folder.add(Folder_Structure(f"{self.__root}\\{item_path}"))
+    def get_file_str(self, folder:Folder):
+        return folder.__str__()
 
-    def add_required_folder(self, item_path):
-        self.__files.add(Folder_Structure(f"{self.__root}\\{item_path}"))
+    def get_folder_str(self, folder:Folder):
+        return folder.__str__()
 
+def main():
+    PATH_Final = "C:\\Users\\zhouw\\OneDrive\\Documents\\vs\\Invoice Processing\\python_p2_FME\\test Folder I"
+    PATH = "C:\\Users\\zhouw\\OneDrive\\Documents\\vs\\Invoice Processing\\test Folder"
 
-# Control Folder Structure
-
-def folder_hierarchy(root_folder: Folder_Structure):
-    folder_list = root_folder.get_folders()
-    file_list = root_folder.get_files()
-    #print(folder_list.getItem(0).get_root())
-    #print(file_list.getItem(0).get_root())
-
-    if folder_list.getItem(0).get_root() == 'Folder None' and file_list.getItem(0).get_root() == 'Folder None':
-        #print("both empty return none")
-        return None
-    elif folder_list.getItem(0).get_root() == 'Folder None':
-        #print("one empty return none") 
-        return None
-
-    elif folder_list.getItem(0).get_root() != 'Folder None':
-        ### loop through the folder of a root
-        #print(folder_list.getSize())
-        for i in range(folder_list.getSize()):
-
-            #print(i)
-            root_path = folder_list.getItem(i).get_root()  # path
-            #print(f"root_path {root_path}")
-            new_folder = Folder_Structure(root_path)
-            folder_list.replace(i,new_folder)
-
-            folder_hierarchy(new_folder)  #  ->  mistake
+    folder = Folder(PATH_Final)
+    Manage = Folder_Management()
+    Manage.initailize(folder)
+    # Test
+    for i in range(6):
+        print(folder.get_folder().getItem(5).get_file().getItem(i).get_root())
 
 
-PATHII = "C:\\Users\\zhouw\\OneDrive\\Documents\\vs\\Invoice Processing\\python_p2_FME\\test Folder I"
-PATH = "C:\\Users\\zhouw\\OneDrive\\Documents\\vs\\Invoice Processing\\test Folder"
-ROOT = Folder_Structure(PATH)
-folder_hierarchy(ROOT)
+if __name__== "__main__":
+    main()
 
-print(ROOT.get_folders().getItem(0).get_root_path())
+
