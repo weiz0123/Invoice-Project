@@ -22,21 +22,23 @@ import matplotlib.patches as patches
 
 """ Instance """
 from Folder_Management import Folder, Invoice_Source_Management, Folder_Management
-from GUI_Data_Transfer import ComboBox_Data_Transfer as CO
-from GUI_Data_Transfer import File_Explorer_Data_Transfer as FO
-ui_file_path = "C:\\Users\\zhouw\\OneDrive\\Documents\\vs\\Invoice Processing\\python_p3_Modulization\\proccessed\\Invoice_Management_System.ui"
-PATH = "C:\\Users\\zhouw\\OneDrive\\Documents\\vs\\Invoice Processing\\python_p3_Modulization\\test Folder"
+from Data_Transfer import ComboBox_Data_Transfer as CO
+from Data_Transfer import File_Explorer_Data_Transfer as FO
+from Data_Transfer import PushButton_Data_Transfer as PO
 
-
+""" GUI DESIGN OBPTIMIZE"""
+from comboBox.Company_List import Company_List 
+ui_file_path = "C:\\Users\\zhouw\\OneDrive\\Documents\\vs\\Invoice Processing\\python_p4_Version\\Invoice_Management_System.ui"
+PATH = "C:\\Users\\zhouw\\OneDrive\\Documents\\vs\\Invoice Processing\\python_p4_Version\\test Folder"
 
 #
 """ Folder Management Section"""  
 FOLDER = Folder(PATH)
 MANAGE = Folder_Management()
 INVOICE_MANAGE = Invoice_Source_Management()
-comboBox_IO = CO(FOLDER, MANAGE, INVOICE_MANAGE) # Data Transfer between GUI and Processor
+comboBox_IO = CO(FOLDER, MANAGE, INVOICE_MANAGE) # Data Transfer between comboBox and Processor
 file_explorer_IO = FO(FOLDER,MANAGE,INVOICE_MANAGE) # Data Transfer between GUI and File Explorer
-
+pushButton_IO = PO(FOLDER, MANAGE, INVOICE_MANAGE) # Data Transfer between GUI and pushButtono
 def company_list_name() -> list:
     '''
     This method returns a list of each company's name. The list can be represented in a comboBox
@@ -47,7 +49,9 @@ def company_list_name() -> list:
         each_company_path:str = FOLDER.get_folder().getItem(i).get_root()
         name = each_company_path[each_company_path.rfind('\\')+1:]
         aList.append(name)
-    comboBox_IO.deliever_comboBox_list("Company_ComboBox",aList)
+    print(aList)
+    comboBox_IO.controll_deliever_list("Company_ComboBox",aList)
+    print("deliever completed //////////////")
 
 
 def Initialize_Folder_System(root_folder_path:str):
@@ -58,7 +62,7 @@ def Initialize_Folder_System(root_folder_path:str):
     INVOICE_MANAGE.refresh_image_folder(FOLDER)
     MANAGE.refresh(FOLDER) # refresh when new item is added to the file
     print("Initialize Info Complete...")
-    company_list_name()
+    
 
 
 # The section above only deal with first time Data Step up
@@ -164,7 +168,11 @@ class MainWindow(QWidget):
 
         #container
         self.__Company_List : QComboBox = self.findChild(QComboBox, "Company_ComboBox")
-    
+        comboBox_IO.set_comboBox_list([self.__Company_List])
+        #company_list_setup = Company_List(self.__Company_List, comboBox_IO, FOLDER, MANAGE, INVOICE_MANAGE)
+        #company_list_setup.set_plot_tool(self.sc)
+        company_list_name()
+        
         #button
         self.__capture_button : QPushButton = self.findChild(QPushButton, "capture_button")
         self.__save_button : QPushButton = self.findChild(QPushButton, "save_button")
@@ -173,10 +181,13 @@ class MainWindow(QWidget):
         self.__add_folder_button: QPushButton = self.findChild(QPushButton, "add_folder_button")
         self.__delete_folder_button : QPushButton = self.findChild(QPushButton, "delet_folder_button")
         self.__setting_button: QToolButton = self.findChild(QToolButton, "setting_button")
-
+        
+        pushButton_IO.set_pushButton_list([self.__capture_button, self.__save_button, self.__process_button, self.__error_button,
+                                           self.__add_folder_button, self.__delete_folder_button, self.__setting_button ])
         # EditLine Box
         self.__words = []
         self.__search_company_name_lineBox: QLineEdit = self.findChild(QLineEdit, "search_company_name_lineBox")
+
 
         print("initailize UI componenet...")
         self.setUpMainWindow()
@@ -210,7 +221,7 @@ class MainWindow(QWidget):
 
     """ ComboBox Click Group """
     def company_name_comboBox_IO(self):
-        comboBox_IO.deliever_index(self.__Company_List)
+        comboBox_IO.combo_deliever_index(self.__Company_List)
         comboBox_IO.find_commpany_path(self.__Company_List.objectName())
 
         # Recieve image: 
@@ -303,14 +314,17 @@ class MainWindow(QWidget):
         self.__delete_folder_button.clicked.connect(self.delete_folder_click)
 
     def comboBox_IO(self):
-        self.__words = comboBox_IO.get_comboBox_list(self.__Company_List)  # this will represent the list on ComboBox
+        self.__words = comboBox_IO.combo_recieve_list(self.__Company_List)  # this will represent the list on ComboBox
+        self.__Company_List.addItems(self.__words)
         self.__Company_List.currentIndexChanged.connect(self.company_name_comboBox_IO)  
-
+    
     def img_IO(self):
+        pass
+        '''
         img_path = comboBox_IO.find_first_images_path(self.__Company_List.objectName())[0]
         self.sc.plot_image(img_path)
         self.rs = RectangleSelector(self.sc.fig.gca(), self.on_rectangle_select)
-
+        '''
     """ Main Window Set Up """
     def setUpMainWindow(self):
         print("Loading UI data...")
@@ -344,7 +358,7 @@ class MainWindow(QWidget):
 
         """ plot image / Shape """
         self.img_IO()
-        
+              
         print("Window Set up Complete ")
 
 # Run the program
