@@ -1,6 +1,8 @@
 # Invoice-Project (TV0.02)
 ![image](https://github.com/weiz0123/Invoice-Project/assets/76544381/bff389cf-366d-430a-bcdc-0528faa53678)
 ...
+============================================================================================
+============================================================================================
 # Current Stage
 1. Auto Extraction is compeleted
 2. be able to init current companies with their invoice
@@ -24,7 +26,8 @@
    from a dynamic structure (i.e. tables)
 
 ## gather as much online source / source code as possible
-======================================================================================================================================================
+============================================================================================
+============================================================================================
 
 # None Standard Library Used:
 1. tesseract-ocr (needs to add to environment variable mannully)
@@ -49,3 +52,6 @@
 # NOTICE:
 1. Copy the project path to "sys.path.append (#here is the project path)" for each file...
 2. this way of importing needs to be fixed
+
+============================================================================================
+============================================================================================
