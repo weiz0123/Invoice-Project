@@ -26,9 +26,9 @@
    from a dynamic structure (i.e. tables)
 
 ## gather as much online source / source code as possible
+...
 ============================================================================================
 ============================================================================================
-
 # None Standard Library Used:
 1. tesseract-ocr (needs to add to environment variable mannully)
 2. opencv / cv2
@@ -53,5 +53,3 @@
 1. Copy the project path to "sys.path.append (#here is the project path)" for each file...
 2. this way of importing needs to be fixed
 
-============================================================================================
-============================================================================================
