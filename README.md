@@ -1,6 +1,31 @@
 # Invoice-Project (current stage)
 ![image](https://github.com/weiz0123/Invoice-Project/assets/76544381/bff389cf-366d-430a-bcdc-0528faa53678)
 ...
+# Current Stage
+1. Auto Extraction is compeleted
+2. be able to init current companies with their invoice
+3. be able to add / delete / update information from company / new company
+
+   
+# Goal of this version
+1. Be Able to Systematically process and store information
+2. Better GUI Display
+3. Display location of the extraction with proper label
+4. Establish a database for storing all the information (can be cloud database??)
+   a. firebase - Google
+   b. MongleDB
+   c. sqlite
+
+   d. mysql or sql server (not recommanded)
+
+   *needs to choose one from the above list
+# Challenging Issue:
+1. we need to find a way to set up a modle that can be used to read and extract informaiton
+   from a dynamic structure (i.e. tables)
+
+## gather as much online source / source code as possible
+======================================================================================================================================================
+
 # None Standard Library Used:
 1. tesseract-ocr (needs to add to environment variable mannully)
 2. opencv / cv2
