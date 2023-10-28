@@ -1,4 +1,5 @@
-# Invoice-Project
+# Invoice-Project (current stage)
+![image](https://github.com/weiz0123/Invoice-Project/assets/76544381/bff389cf-366d-430a-bcdc-0528faa53678)
 ...
 # None Standard Library Used:
 1. tesseract-ocr (needs to add to environment variable mannully)
