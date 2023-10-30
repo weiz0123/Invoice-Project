@@ -29,6 +29,7 @@
 ...
 ============================================================================================
 ============================================================================================
+# Python 3.9.*
 # None Standard Library Used:
 1. tesseract-ocr (needs to add to environment variable mannully)
 2. opencv / cv2
@@ -52,4 +53,10 @@
 # NOTICE:
 1. Copy the project path to "sys.path.append (#here is the project path)" for each file...
 2. this way of importing needs to be fixed
-
+============================================================================================
+============================================================================================
+# TO START ....
+1. After installing the folder, go to the path Invoice-Project/GUI_Management/User_Interface_Main.py
+2. Make Sure all the libraries are installed
+3. .ui (GUI) File is under GUI_Management
+   
