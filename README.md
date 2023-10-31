@@ -1,7 +1,7 @@
 # Invoice-Project (TV0.02)
 ![image](https://github.com/weiz0123/Invoice-Project/assets/76544381/bff389cf-366d-430a-bcdc-0528faa53678)
 ...
-<<<<<<< Invoice_Extraction_TV0.02-(Current-Main-Branch)
+
 ============================================================================================
 ============================================================================================
 # Current Stage
@@ -61,11 +61,5 @@
 2. Make Sure all the libraries are installed
 3. .ui (GUI) File is under GUI_Management
    
-=======
-#### (Details of the project will be introduced in "Invoice_Extraction_TV0.02-(Current-Main-Branch)")
-### All of the current changes/works are done in the branch "Invoice_Extraction_TV0.02-(Current-Main-Branch)"
-### All the pull requests are made from "Invoice_Extraction_TV0.02-(Current-Main-Branch)"
-### After "Invoice_Extraction_TV0.02-(Current-Main-Branch)" is completed, it will be then merged to main
-#### ("Invoice_Extraction_TV0.01" is only for historical backup)
-#### ( To open up a new branch for personal use, add firstName to the end of the branch name)
+
 >>>>>>> main
