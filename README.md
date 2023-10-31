@@ -1,6 +1,7 @@
 # Invoice-Project (TV0.02)
 ![image](https://github.com/weiz0123/Invoice-Project/assets/76544381/bff389cf-366d-430a-bcdc-0528faa53678)
 ...
+
 ============================================================================================
 ============================================================================================
 # Current Stage
@@ -60,3 +61,5 @@
 2. Make Sure all the libraries are installed
 3. .ui (GUI) File is under GUI_Management
    
+
+>>>>>>> main
