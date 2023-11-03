@@ -60,6 +60,7 @@
 1. After installing the folder, go to the path Invoice-Project/GUI_Management/User_Interface_Main.py
 2. Make Sure all the libraries are installed
 3. .ui (GUI) File is under GUI_Management
+4. add pytesseract.pytesseract.tesseract_cmd = "C:\\Program Files\\Tesseract-OCR\\tesseract.exe" to Process_Access.py
    
 
 >>>>>>> main
