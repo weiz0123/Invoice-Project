@@ -1,0 +1,6 @@
+# NEW UPDATE INFORMATION
+
+## 2023-11-08
+1. followinng link is an recommandation for documentation techniques
+   https://developers.google.com/style/
+2. Starting Different Documentation Process and Planning
