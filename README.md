@@ -1,5 +1,7 @@
 # New Announcement
-   * The project description is the file *Porject_Description.md* under the directory *Documentation*
+   ### The project description is the file *Porject_Description.md* under the directory *Documentation*
+
+   
 ![image](https://github.com/weiz0123/Invoice-Project/assets/76544381/bff389cf-366d-430a-bcdc-0528faa53678)
 
      Figure 1.1 This is a demo picture of the software at current stage...
