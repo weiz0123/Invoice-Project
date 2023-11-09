@@ -1,6 +1,5 @@
 # Invoice-Project (TV0.02)
 ![image](https://github.com/weiz0123/Invoice-Project/assets/76544381/bff389cf-366d-430a-bcdc-0528faa53678)
-...
 
 =============================================================================================================================================================================================================================================================
 
@@ -27,7 +26,7 @@
    from a dynamic structure (i.e. tables)
 
 ## gather as much online source / source code as possible
-...
+
 =============================================================================================================================================================================================================================================================
 # Python 3.9.*
 # None Standard Library Used:
@@ -37,7 +36,7 @@
 4. watchdog
 5. pyplot
 6. matplot
-7. ... (maybe a couple of more ? refering to the source code)
+7. .... (maybe a couple of more ? refering to the source code)
 
 # GUI FrameWork:
 1. Qt.
