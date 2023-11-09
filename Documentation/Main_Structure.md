@@ -36,7 +36,3 @@ ________________________________________________________________________________
 ## Operation Access
 
 ## User Interface Management Main & Container
-
-
-
-
