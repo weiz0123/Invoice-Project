@@ -1,38 +1,40 @@
 # Main_Structure
 ![Main Structure](https://github.com/weiz0123/Invoice-Project/assets/76544381/1e3413a5-6270-463e-9cb9-dda0d877f647)
+Figure 1.1: this is a general strcture demonstrates how data is requested, accessed, and manipulated,  Notice: this is the seperation between "Font-End" (display) and "Back-end" (data reads and writes)
 ## User Level Management (ULM)
   1. User Level Management gets *data* from **Data Access**, then pass the *data* to GUI for Display
-  2. Notice: this is the seperation between "Font-End" (display) and "Back-end" (data reads and writes)
+  2. The 
 _______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
-* "Back-End" Classes
-## Example:
+## "Back-End" Classes
+### Example:
 ![Main Structure Example](https://github.com/weiz0123/Invoice-Project/assets/76544381/63aad4b1-554c-49a9-8cc4-a941b63f92a5)
+Figure 2.1: This only demonstrates a general idea for requesting data, proccessing data, and returning data back to user for display purpose. user main send many different requests to the "Back-End"
 
-## Data Access
+### Data Access
   1. Data Access organize and format *raw data* such as company name, company folder path, image name, image path etc.
   2. The *raw data* are aqcuired from **CLM**, then it is formatted for display
 
-## Company Level Management (CLM)
+### Company Level Management (CLM)
   1. Company Level Management serves the purpose to managem folder for each company
   2. When a *new company* folder is added to the system, a **CLM** will be created.
   3. All the files and directories in the *new company* will be managed by that **CLM**
      
-## Data Access
+### Data Access
 
 
-## Process Access
+### Process Access
 
 
-## Image Level Management (ILM)  
+### Image Level Management (ILM)  
   1. For each image, **ILM** will be created to keep track of the image information including image name, image path, cv image etc.
 
-## Secure Data Management (SDM); including Data and Position
+### Secure Data Management (SDM); including Data and Position
 
 
 
 _______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
-## Example:
+### Example:
 
-## Operation Access
+### Operation Access
 
-## User Interface Management Main & Container
+### User Interface Management Main & Container
