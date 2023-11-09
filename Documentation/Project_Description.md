@@ -52,7 +52,7 @@ Figure 1.1 a Demo of the software at current stage
 # NOTICE:
 1. Copy the project path to "sys.path.append (#here is the project path)" for each file...
 2. this way of importing needs to be fixed
-=============================================================================================================================================================================================================================================================
+
 # TO START ....
 1. After installing the folder, go to the path Invoice-Project/GUI_Management/User_Interface_Main.py
 2. Make Sure all the libraries are installed
