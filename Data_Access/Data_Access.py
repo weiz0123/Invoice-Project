@@ -32,6 +32,9 @@ class Data_Access:
         # this list represents a model of companies. each element represents a "company manager" for the target company
         cls.class_level_management_list = []
 
+        # search and add all the company_manager for all company directories
+        cls._generate_company_level_management()
+
         return cls._instance
 
     '''===Internal Class Implementation: the following methods cannot be accessed by other classes==='''
@@ -86,7 +89,7 @@ class Data_Access:
 
         return company_name_list
 
-    def get_company_cv_image(self, target_company_name: str, target_img_name: str) -> ndarray:
+    def get_company_targeted_image(self, target_company_name: str, target_img_name: str) -> ndarray:
         """
         1. when user attempts to find a specific image from a company, 2 parameters are required. target_company_name is
            used to locate the designated company_manager. the company_manager will take target_img_name as its parameter
