@@ -1,6 +1,9 @@
-import os
+import os, cv2
 from numpy import ndarray
 from Data_Management.Image_Level_Management import Image_Level_Management
+from Data_Management.Secure_Data_Management import Position_Data_Management
+from Data_Management.Secure_Data_Management import Data_Management
+from Data_Management.Secure_Data_Management import Category_Manager
 
 
 class Company_Level_Management:
@@ -8,6 +11,7 @@ class Company_Level_Management:
     Purpose:
     Communication:
     """
+
     def __init__(self, company_root_path):
         # store the company folder's path
         self.company_root_path = company_root_path
@@ -17,7 +21,16 @@ class Company_Level_Management:
         # This Image_Level_Management becomes the image manager for that image
         self.ilm = {}
         self.data = {}
+        self.position = {}
+        self.category = Category_Manager(f"{company_root_path}\\DoNotDelete\\Category", "category.json")
+        self.dm = Data_Management(f"{company_root_path}\\DoNotDelete", "data.json", self.category.get_category_list())
+        self.pm = Position_Data_Management(f"{company_root_path}\\DoNotDelete", "position.json",
+                                           self.category.get_category_list())
 
+        # Add all the image managers to .ilm list
+        self.generate_image_manager()
+        self.data = self.dm.get_data()
+        self.position = self.pm.get_position_list()
     def generate_image_manager(self) -> None:
         """
         1. loop through the directory f"{self.company_root_path}\\Images". image name is taken as the key.
@@ -48,7 +61,7 @@ class Company_Level_Management:
         company_name: str = os.path.basename(self.company_root_path)
         return company_name
 
-    def get_cv_image(self, target_image_name: str) -> ndarray:
+    def get_cv_img(self, target_image_name: str) -> ndarray:
         """
         1. if target_image_name is None, then the first image will be returned as cv image using image manager
         2. if target_image_name is given, then the corresponding image manager will be found and convert the image
@@ -80,3 +93,70 @@ class Company_Level_Management:
 
         return image_name_list
 
+    def update_position_info(self, command: str, category_key: str = None, pos1: list[float] = None, pos2: list[float] = None):
+        """
+        1. take newly determined position
+        2. delete position when category is deleted
+
+        param: command, category key, position 1 [x, y], position 2 [x, y]
+        return:
+        """
+        if command == "update":
+            self.pm.update_category_position(category_key, pos1, pos2)
+        elif command == "remove":
+            self.pm.remove_category(category_key)
+
+    def update_data_info(self, command: str, image_name: str, category_key: str = None, text: str = None):
+        """
+        1. take newly extracted text
+        2. delete extracted text when category is deleted
+
+        param: command, image name, category key, text
+        return:
+        """
+        if command == "update":
+            self.dm.update_extracted_information(image_name, category_key, text)
+        elif command == "remove":
+            self.dm.remove_image(image_name)
+
+    def update_category(self, category_list: list[str]):
+        """
+        1. sync category info to all .dm and .pm
+        param: category list
+        return:
+        """
+        self.category.update_category(category_list)
+        self.dm.update_category(category_list)
+        self.pm.update_category(category_list)
+
+    def update_to_file(self):
+        """
+        1. update all data to local file for .category .pm and .dm
+
+        param:
+        return:
+        """
+        self.pm.update_to_file()
+        self.dm.update_to_file()
+        self.category.update_to_file()
+
+
+
+def main():
+    test_path: str = "C:\\Users\\zhouw\\OneDrive\\Documents\\personal sci project\\vs\\ProjectIV\\Test_Resource\\company_test\\CompanyI"
+    company_manager = Company_Level_Management(test_path)
+    image_list: list = company_manager.get_image_name_list()
+    print(f"company name {company_manager.get_company_name()}")
+    print(f"company path {company_manager.company_root_path}")
+    print(f"length of image list {len(image_list)}")
+    print(f"image name list: {image_list}")
+    image = company_manager.get_cv_img(image_list[0])
+    cv2.imshow("image window", image)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
+
+if __name__ == "__main__":
+    print("=====================Basic Test=====================")
+    print("Company_Level_Management.py test")
+    # main()
