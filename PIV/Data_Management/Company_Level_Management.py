@@ -31,6 +31,7 @@ class Company_Level_Management:
         self.generate_image_manager()
         self.data = self.dm.get_data()
         self.position = self.pm.get_position_list()
+
     def generate_image_manager(self) -> None:
         """
         1. loop through the directory f"{self.company_root_path}\\Images". image name is taken as the key.
@@ -93,7 +94,8 @@ class Company_Level_Management:
 
         return image_name_list
 
-    def update_position_info(self, command: str, category_key: str = None, pos1: list[float] = None, pos2: list[float] = None):
+    def update_position_info(self, command: str, category_key: str = None, pos1: list[float] = None,
+                             pos2: list[float] = None):
         """
         1. take newly determined position
         2. delete position when category is deleted
@@ -140,6 +142,14 @@ class Company_Level_Management:
         self.dm.update_to_file()
         self.category.update_to_file()
 
+    def get_extracted_data(self) -> dict[dict]:
+        return self.dm.get_data()
+
+    def get_category_list(self) -> list[str]:
+        return self.category.get_category_list()
+
+    def get_position_list(self) -> dict:
+        return self.pm.get_position_list()
 
 
 def main():
