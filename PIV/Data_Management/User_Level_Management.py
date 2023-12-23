@@ -100,3 +100,28 @@ class User_Level_Management:
             return True
         except ValueError(f"unable to convert {pdf_path} to jpg"):
             return False
+
+    def display_image_position_info(self, company_name: str) -> dict:
+        return self.data_access.get_position_for_all_category(company_name)
+
+    def display_extracted_information_for_target_image(self, company_name: str, image_name: str) -> dict[dict]:
+        return self.data_access.get_extracted_data_for_targeted_image(company_name, image_name)
+
+    def update_data(self, company_name: str, command: str, image_name: str, category_key: str = None, text: str = None):
+        self.data_access.update_data(company_name, command,image_name,category_key,text)
+
+    def update_position(self, company_name: str, command: str, category_key: str = None, pos1: list[float] = None,
+                        pos2: list[float] = None):
+        self.data_access.update_position(company_name, command,category_key,pos1,pos2)
+
+    def update_category(self, company_name: str, category_list: list[str]):
+        self.data_access.update_category(company_name, category_list)
+
+    def update_to_file(self, company_name: str):
+        self.update_to_file(company_name)
+
+
+
+
+
+
