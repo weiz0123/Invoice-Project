@@ -52,13 +52,16 @@ if __name__ == "__main__":
     run_app()
 
 """
-
+def search_box(..., target_list):
+    ... then continue here...? maybe
+    ...doesnt have to follow this...
 
 def main():
   # make sure to change the path to match your test environemnt
   DEFAULT_PATH = "C:\\Users\\zhouw\\OneDrive\\Documents\\personal sci project\\vs\\ProjectIV\\Test_Resource\\company_test"
   USER: User_Level_Managment = User_Level_Management(DEFAULT_PATH)
   target_list = USER.display_company_name() # 可以去看看， User_Level_Managment 里面有哪些function
+ 
 
 
 
