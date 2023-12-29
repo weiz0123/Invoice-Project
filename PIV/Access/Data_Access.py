@@ -16,6 +16,7 @@ class Data_Access:
 
     Communication:
     1. User_Level_Management
+    2. Update_Access
     """
     _instance = None
 
@@ -28,7 +29,7 @@ class Data_Access:
         cls.data_access_root_path = data_access_root_path
 
         # this list represents a model of companies. each element represents a "company manager" for the target company
-        cls.class_level_management_list: list = []
+        cls.company_level_management_list: list = []
 
         # search and add all the company_manager for all company directories
         cls._generate_company_level_management(cls)
@@ -51,7 +52,7 @@ class Data_Access:
             for company in folder:
                 company_path = f"{self.data_access_root_path}\\{company}"
                 new_company: Company_Level_Management = Company_Level_Management(company_path)
-                self.class_level_management_list.append(new_company)
+                self.company_level_management_list.append(new_company)
             break
         print("generate_company_level_management succeed\n")
 
@@ -62,7 +63,7 @@ class Data_Access:
           param:  (company_name:str)
           return: Company_Level_Management
         """
-        for company_manager in self.class_level_management_list:
+        for company_manager in self.company_level_management_list:
             if company_manager.get_company_root_path() == f"{self.data_access_root_path}\\{company_name}":
                 return company_manager
         raise Exception("Data_Access._get_company_level_management -> company company_manager not found")
@@ -84,7 +85,7 @@ class Data_Access:
         return: a list of company names
         """
         company_name_list = []
-        for company_manager in self.class_level_management_list:
+        for company_manager in self.company_level_management_list:
             company_name_list.append(company_manager.get_company_name())
 
         return company_name_list
