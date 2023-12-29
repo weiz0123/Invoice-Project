@@ -14,6 +14,8 @@ ________________________________________________________________________________
 4. UI/UX Design (in progress...?)
 5. Docmentation = (ABSOLUTLY 0 progress)
 
+7. connection between UI and Function
+8. Update_Access is able to detect added path, and add in company manager for newly added folder
 ___________________________________________________________________________________________________________________________________________________________________________________
 ## 2023-11-08 (init)
 1. followinng link is an recommandation for documentation techniques
