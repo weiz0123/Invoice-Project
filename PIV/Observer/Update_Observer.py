@@ -1,18 +1,22 @@
+import threading
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
-import time
-from Data_Management.Company_Level_Management import Company_Level_Management
-from Data_Management.User_Level_Management import User_Level_Management
 
 
 class Update_Observer:
-    def __init__(self, id: int, target_path: str, emitter):
-        self.id = id
+    def __init__(self, _id: int, target_path: str, emitter):
+        self.id = _id
         self.target_path: str = target_path
         self.emitter_to_access_unit = emitter
-        update_manager = Directory_Observer(self.signal_receiver_create, self.signal_receiver_delete)
+        self.update_manager = Directory_Observer(self.signal_receiver_create, self.signal_receiver_delete)
+
+    def start(self):
+        """
+        this will be called by threading
+        return:
+        """
         observer = Observer()
-        observer.schedule(update_manager, target_path, recursive=False)
+        observer.schedule(self.update_manager, self.target_path, recursive=False)
         observer.start()
         while True:
             pass
@@ -24,7 +28,7 @@ class Update_Observer:
         param target_path_list:
         return:
         """
-        self.emitter_to_access_unit(target_path_list, self.id)
+        self.emitter_to_access_unit(target_path_list, self.id, "create")
 
     def signal_receiver_delete(self, target_path_list: list[str]):
         """
@@ -33,7 +37,7 @@ class Update_Observer:
         param target_path_list:
         return:
         """
-        self.emitter_to_access_unit(target_path_list, self.id)
+        self.emitter_to_access_unit(target_path_list, self.id, "delete")
 
 
 class Directory_Observer(FileSystemEventHandler):
@@ -81,7 +85,9 @@ def test_function(target_list: list, id: int):
 
 def main():
     DEFAULT_PATH = "C:\\Users\\zhouw\\OneDrive\\Documents\\personal sci project\\vs\\ProjectIV\\Test_Resource\\company_test"
-    update_observer = Update_Observer(DEFAULT_PATH, test_function)
+    update_observer = Update_Observer(1, DEFAULT_PATH, test_function)
+    thread= threading.Thread(target=update_observer.start)
+    thread.start()
 
 
 if __name__ == "__main__":
