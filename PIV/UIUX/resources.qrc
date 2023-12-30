@@ -1,0 +1,23 @@
+<RCC>
+  <qresource prefix="icons">
+    <file>icons/arrow.png</file>
+    <file>icons/direct-download.png</file>
+    <file>icons/excel.png</file>
+    <file>icons/file-import.png</file>
+    <file>icons/home.png</file>
+    <file>icons/open.png</file>
+    <file>icons/right.png</file>
+    <file>icons/selection-box.png</file>
+    <file>icons/zoom-in.png</file>
+    <file>icons/arrow.png</file>
+    <file>icons/direct-download.png</file>
+    <file>icons/excel.png</file>
+    <file>icons/home.png</file>
+    <file>icons/open.png</file>
+    <file>icons/right.png</file>
+    <file>icons/right.png</file>
+    <file>icons/arrow.png</file>
+    <file>icons/direct-download.png</file>
+    <file>icons/excel.png</file>
+  </qresource>
+</RCC>
