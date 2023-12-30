@@ -43,7 +43,7 @@ Figure 1.1 a Demo of the software at current stage
 2. Qt Creator 10.0.2 (Community) Version is used for GUI Design
 3. PyQt6 and PyQt5 libraries are used for python developmenet of the interfase
 
-# Test Source:
+# Test Source: (the test resource is no longer public in repository)
 1. the folder structure of the test source is set fixed.
 2. DO NOT Manipulate the folder strcuture of the test folder
 3. when testing on local machine. paste the path fo the company_test folder to the variable "test_path"
