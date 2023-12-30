@@ -1,5 +1,6 @@
 # Invoice-Project (TV0.02)
-C:\Users\zhouw\OneDrive\Desktop\Screenshot 2023-12-30 120504.png
+![Screenshot 2023-12-30 120504](https://github.com/weiz0123/Invoice-Project/assets/76544381/007b7971-ae38-451f-aaf9-0541ee2d2fc1)
+
 Figure 1.1 a Demo of the software at current stage
 
 
