@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(646, 506)
+        MainWindow.resize(711, 567)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
@@ -111,7 +111,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout.addWidget(self.Tab_Widget)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 646, 18))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 711, 18))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -196,6 +196,7 @@ class Ui_MainWindow(object):
         icon6 = QtGui.QIcon()
         icon6.addPixmap(QtGui.QPixmap(":/icons/icons/zoom-in.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.actionzoom.setIcon(icon6)
+        self.actionzoom.setShortcutContext(QtCore.Qt.WindowShortcut)
         self.actionzoom.setObjectName("actionzoom")
         self.actionselection_box = QtWidgets.QAction(MainWindow)
         icon7 = QtGui.QIcon()
@@ -222,7 +223,7 @@ class Ui_MainWindow(object):
         self.toolBar.addAction(self.actionselection_box)
 
         self.retranslateUi(MainWindow)
-        self.Tab_Widget.setCurrentIndex(0)
+        self.Tab_Widget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -261,13 +262,3 @@ class Ui_MainWindow(object):
         self.actionzoom.setText(_translate("MainWindow", "zoom"))
         self.actionselection_box.setText(_translate("MainWindow", "selection_box"))
 import resources_rc
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())
