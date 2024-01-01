@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>711</width>
-    <height>567</height>
+    <width>699</width>
+    <height>492</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,7 +30,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <property name="movable">
        <bool>false</bool>
@@ -41,17 +41,50 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout_4">
         <item row="0" column="0">
-         <widget class="Line" name="line">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0">
          <layout class="QGridLayout" name="Extraction_GridLayout">
           <property name="sizeConstraint">
            <enum>QLayout::SetFixedSize</enum>
           </property>
+          <item row="0" column="2" rowspan="6" colspan="5">
+           <layout class="QVBoxLayout" name="Matplot_VLayout"/>
+          </item>
+          <item row="2" column="0" colspan="2">
+           <widget class="QPushButton" name="process_button">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>process</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0" rowspan="3" colspan="2">
+           <layout class="QVBoxLayout" name="File_Explorer_VLayout">
+            <item>
+             <widget class="QTreeWidget" name="File_Explore_List_Widget">
+              <column>
+               <property name="text">
+                <string notr="true">Invoice-Project</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string/>
+               </property>
+              </column>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="1">
+           <widget class="QComboBox" name="Category_ComboBox"/>
+          </item>
+          <item row="1" column="0">
+           <widget class="QComboBox" name="Company_ComboBox"/>
+          </item>
           <item row="0" column="0" colspan="2">
            <widget class="QLineEdit" name="search_company_name_lineBox">
             <property name="sizePolicy">
@@ -67,28 +100,6 @@
              <string/>
             </property>
            </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QComboBox" name="Company_ComboBox"/>
-          </item>
-          <item row="1" column="1">
-           <widget class="QComboBox" name="Category_ComboBox"/>
-          </item>
-          <item row="2" column="0" colspan="2">
-           <widget class="QPushButton" name="process_button">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string>process</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="2" rowspan="4" colspan="5">
-           <layout class="QVBoxLayout" name="Matplot_VLayout"/>
           </item>
          </layout>
         </item>
@@ -164,7 +175,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>711</width>
+     <width>699</width>
      <height>18</height>
     </rect>
    </property>
