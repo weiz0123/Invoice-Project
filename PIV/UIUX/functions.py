@@ -76,18 +76,24 @@ def add_category():
 
 def add_button(self):
     entered_text = self.lineEdit.text()
-    alist.append(entered_text)
-    # append user's category list here
-    self.comboBox.addItem(entered_text)
-    print("Entered text:", entered_text)
+    if entered_text not in alist and entered_text:
+        # append user's category list here
+        alist.append(entered_text)
+        self.comboBox.addItem(entered_text)
+        print("Add category successfully")
+    else:
+        print(f"Fail to add. Please check if {entered_text} is already a category")
     self.lineEdit.clear()
 
 def remove_button(self):
     current_text = self.comboBox.currentText()
-    index = 0
-    for word in alist:
-        if word == current_text:
-            alist.remove(word)
-            self.comboBox.removeItem(index)
-        index+=1
-    print(f"remove: {current_text}")
+    if len(alist) == 0:
+        print("Fail to remove, no category exist")
+    else:
+        index = 0
+        for word in alist:
+            if word == current_text:
+                alist.remove(word)
+                self.comboBox.removeItem(index)
+            index+=1
+        print(f"remove: {current_text}")
