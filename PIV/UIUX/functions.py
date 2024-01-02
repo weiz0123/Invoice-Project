@@ -3,6 +3,8 @@ from PyQt5.QtCore import Qt, QDir, QUrl
 from PyQt5.QtWidgets import QTreeWidget, QTreeWidgetItem, QCompleter, QDialog
 from file_explorer import my_tree
 import category_dialog
+
+alist = ['1', '2'] #for testing
 def show_status(self, company, num_inv):
     """
     show the message in status bar
@@ -58,22 +60,34 @@ def initialize_search_box(self):
     completer.setCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)  # Set case sensitivity
     self.search_company_name_lineBox.setCompleter(completer)
 
-    # self.result_label = QLabel("Suggested items will appear as you type", self)
-    # layout.addWidget(self.result_label)
-
 def triggered_tools(self):
     # Connect the triggered signal to a method (e.g., on_import_new_company)
     self.actionAdd_category.triggered.connect(add_category)
 
 def add_category():
-    # ui = category_dialog.Ui_Dialog()
-    #
-
     Dialog = QtWidgets.QDialog()
-
     ui = category_dialog.Ui_Dialog()
-
     ui.setupUi(Dialog)
-
+    ui.comboBox.addItems(alist)
+    ui.add.clicked.connect(lambda: add_button(ui))
+    ui.remove.clicked.connect(lambda: remove_button(ui))
     Dialog.show()
-    Dialog.exec_()
+    Dialog.exec_()  #to make this window exist, avoid closing immediatly
+
+def add_button(self):
+    entered_text = self.lineEdit.text()
+    alist.append(entered_text)
+    # append user's category list here
+    self.comboBox.addItem(entered_text)
+    print("Entered text:", entered_text)
+    self.lineEdit.clear()
+
+def remove_button(self):
+    current_text = self.comboBox.currentText()
+    index = 0
+    for word in alist:
+        if word == current_text:
+            alist.remove(word)
+            self.comboBox.removeItem(index)
+        index+=1
+    print(f"remove: {current_text}")
