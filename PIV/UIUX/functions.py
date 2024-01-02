@@ -1,8 +1,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import Qt, QDir, QUrl
-from PyQt5.QtWidgets import QTreeWidget, QTreeWidgetItem
+from PyQt5.QtWidgets import QTreeWidget, QTreeWidgetItem, QCompleter, QDialog
 from file_explorer import my_tree
-
+import category_dialog
 def show_status(self, company, num_inv):
     """
     show the message in status bar
@@ -50,3 +50,30 @@ def initialize_file_explorer(self):
     self.File_Explore_List_Widget.setObjectName("File_Explore_List_Widget")
     self.File_Explore_List_Widget.headerItem().setText(0, "Invoice-Project")
     self.File_Explorer_VLayout.addWidget(self.File_Explore_List_Widget)
+
+def initialize_search_box(self):
+    target_list = ['apple', 'abandon', 'abnormal', 'orange']
+    #remember to replace target_list to USER.display_compnay_name()
+    completer = QCompleter(target_list, self.search_company_name_lineBox)
+    completer.setCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)  # Set case sensitivity
+    self.search_company_name_lineBox.setCompleter(completer)
+
+    # self.result_label = QLabel("Suggested items will appear as you type", self)
+    # layout.addWidget(self.result_label)
+
+def triggered_tools(self):
+    # Connect the triggered signal to a method (e.g., on_import_new_company)
+    self.actionAdd_category.triggered.connect(add_category)
+
+def add_category():
+    # ui = category_dialog.Ui_Dialog()
+    #
+
+    Dialog = QtWidgets.QDialog()
+
+    ui = category_dialog.Ui_Dialog()
+
+    ui.setupUi(Dialog)
+
+    Dialog.show()
+    Dialog.exec_()
