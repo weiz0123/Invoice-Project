@@ -6,7 +6,8 @@ import category_dialog
 import subprocess
 import sys
 
-alist = ['1', '2'] #for testing
+alist = ['1', '2']  # for testing
+
 
 def get_entries(path):
     dir = QDir(path)
@@ -15,21 +16,22 @@ def get_entries(path):
     entries = dir.entryInfoList()
     return entries
 
+
 def update_status(self, path):
     folder_path = path + "\company"
 
     entries = get_entries(folder_path)
     num_company = 0
     for entry in entries:
-        if entry.fileName() in ('.', '..') and entry.isDir():
-            num_company+=1
+        if entry.fileName() not in ('.', '..') and entry.isDir():
+            num_company += 1
     try:
         company = self.Company_ComboBox.currentText()
-        company_path = folder_path+"\\"+company
+        company_path = folder_path + "\\" + company
         company_entries = get_entries(company_path)
         num_inv = 0
         for entry in company_entries:
-            if entry.fileName() in ('.', '..') and entry.isFile():
+            if entry.fileName() not in ('.', '..') and entry.isFile():
                 num_inv += 1
         message = f"Total Company: {num_company},   Current Company: {company},     Number of Invoice: {num_inv}"
     except:
@@ -39,9 +41,25 @@ def update_status(self, path):
     self.message_label.setAlignment(Qt.AlignmentFlag.AlignRight)
     self.statusbar.addWidget(self.message_label, 1)
 
+
 def clear_update_status_bar(self, path):
     self.statusbar.removeWidget(self.message_label)
     update_status(self, path)
+
+
+def initialize_company_combo_box(self, path):
+    folder_path = path + "\company"
+    entries = get_entries(folder_path)
+    for entry in entries:
+        if entry.fileName() not in ('.', '..') and entry.isDir():
+            self.Company_ComboBox.addItem(entry.fileName())
+
+
+def clear_update_company_combo_box(self, path):
+    for i in range(self.Company_ComboBox.count()):
+        self.Company_ComboBox.removeItem(0)
+    initialize_company_combo_box(self, path)
+
 
 def initialize_file_explorer(self, path):
     self.File_Explore_List_Widget = my_tree(self.tab)
@@ -50,21 +68,23 @@ def initialize_file_explorer(self, path):
     self.File_Explore_List_Widget.setObjectName("File_Explore_List_Widget")
     self.File_Explore_List_Widget.headerItem().setText(0, "Invoice-Project")
     self.File_Explorer_VLayout.addWidget(self.File_Explore_List_Widget)
-    folder_path = path+"\company"
-    self.File_Explore_List_Widget.populate_tree(folder_path)
+    self.File_Explore_List_Widget.populate_tree(path)
+
 
 def initialize_search_box(self):
     target_list = ['apple', 'abandon', 'abnormal', 'orange']
-    #remember to replace target_list to USER.display_compnay_name()
+    # remember to replace target_list to USER.display_compnay_name()
     completer = QCompleter(target_list, self.search_company_name_lineBox)
     completer.setCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)  # Set case sensitivity
     self.search_company_name_lineBox.setCompleter(completer)
+
 
 def triggered_tools(self, path):
     # Connect the triggered signal to a method (e.g., on_import_new_company)
     self.actionAdd_category.triggered.connect(add_category)
     self.actionOpenCompanyFolder.triggered.connect(lambda: open_company_folder(path))
     self.actionrefresh.triggered.connect(lambda: refresh(self, path))
+
 
 def add_category():
     Dialog = QtWidgets.QDialog()
@@ -74,7 +94,8 @@ def add_category():
     ui.add.clicked.connect(lambda: add_button(ui))
     ui.remove.clicked.connect(lambda: remove_button(ui))
     Dialog.show()
-    Dialog.exec_()  #to make this window exist, avoid closing immediatly
+    Dialog.exec_()  # to make this window exist, avoid closing immediatly
+
 
 def add_button(self):
     entered_text = self.lineEdit.text()
@@ -87,6 +108,7 @@ def add_button(self):
         print(f"Fail to add. Please check if {entered_text} is already a category")
     self.lineEdit.clear()
 
+
 def remove_button(self):
     current_text = self.comboBox.currentText()
     if len(alist) == 0:
@@ -97,11 +119,12 @@ def remove_button(self):
             if word == current_text:
                 alist.remove(word)
                 self.comboBox.removeItem(index)
-            index+=1
+            index += 1
         print(f"remove: {current_text}")
 
+
 def open_company_folder(path):
-    folder_path = path+"\company"
+    folder_path = path + "\company"
 
     print(folder_path)
     try:
@@ -118,6 +141,8 @@ def open_company_folder(path):
     except Exception as e:
         print(f"Error opening folder: {e}")
 
+
 def refresh(self, path):
     self.File_Explore_List_Widget.populate_tree(path)
     clear_update_status_bar(self, path)
+    clear_update_company_combo_box(self, path)
