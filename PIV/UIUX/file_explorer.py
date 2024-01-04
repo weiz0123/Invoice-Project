@@ -66,9 +66,10 @@ class my_tree(QTreeWidget):
             if entry.isDir():
                 self.add_files_to_tree(entry.filePath(), item)
 
-    def populate_tree(self, folder_path):
+    def populate_tree(self, path):
         self.clear()
         root_item = QTreeWidgetItem(self)
+        folder_path = path+"\company"
         root_item.setText(0, folder_path)
 
         self.add_files_to_tree(folder_path, root_item)

@@ -47,7 +47,7 @@ def clear_update_status_bar(self, path):
     update_status(self, path)
 
 
-def initialize_company_combo_box(self, path):
+def update_company_combo_box(self, path):
     folder_path = path + "\company"
     entries = get_entries(folder_path)
     for entry in entries:
@@ -58,8 +58,16 @@ def initialize_company_combo_box(self, path):
 def clear_update_company_combo_box(self, path):
     for i in range(self.Company_ComboBox.count()):
         self.Company_ComboBox.removeItem(0)
-    initialize_company_combo_box(self, path)
+    update_company_combo_box(self, path)
 
+def update_category_combo_box(self, action=None, item=None):    #item is a string if action is add, item is an index if actin is remove
+    if action=="add":
+        self.Category_ComboBox.addItem(item)
+    elif action == "remove":
+        print(f"update remove: {item}")
+        self.Category_ComboBox.removeItem(item)
+    else:
+        self.Category_ComboBox.addItems(alist) #replace with user's category
 
 def initialize_file_explorer(self, path):
     self.File_Explore_List_Widget = my_tree(self.tab)
@@ -81,35 +89,36 @@ def initialize_search_box(self):
 
 def triggered_tools(self, path):
     # Connect the triggered signal to a method (e.g., on_import_new_company)
-    self.actionAdd_category.triggered.connect(add_category)
+    self.actionAdd_category.triggered.connect(lambda: add_category(self))
     self.actionOpenCompanyFolder.triggered.connect(lambda: open_company_folder(path))
     self.actionrefresh.triggered.connect(lambda: refresh(self, path))
 
 
-def add_category():
+def add_category(main_window):
     Dialog = QtWidgets.QDialog()
     ui = category_dialog.Ui_Dialog()
     ui.setupUi(Dialog)
     ui.comboBox.addItems(alist)
-    ui.add.clicked.connect(lambda: add_button(ui))
-    ui.remove.clicked.connect(lambda: remove_button(ui))
+    ui.add.clicked.connect(lambda: add_button(ui, main_window))
+    ui.remove.clicked.connect(lambda: remove_button(ui, main_window))
     Dialog.show()
     Dialog.exec_()  # to make this window exist, avoid closing immediatly
 
 
-def add_button(self):
+def add_button(self, main_window):
     entered_text = self.lineEdit.text()
     if entered_text not in alist and entered_text:
         # append user's category list here
         alist.append(entered_text)
         self.comboBox.addItem(entered_text)
+        update_category_combo_box(main_window, action="add", item=entered_text)
         print("Add category successfully")
     else:
         print(f"Fail to add. Please check if {entered_text} is already a category")
     self.lineEdit.clear()
 
 
-def remove_button(self):
+def remove_button(self, main_window):
     current_text = self.comboBox.currentText()
     if len(alist) == 0:
         print("Fail to remove, no category exist")
@@ -119,8 +128,10 @@ def remove_button(self):
             if word == current_text:
                 alist.remove(word)
                 self.comboBox.removeItem(index)
-            index += 1
-        print(f"remove: {current_text}")
+            else:
+                index += 1
+        update_category_combo_box(main_window, action="remove", item=index)
+        print(f"remove: {current_text} from index {index}")
 
 
 def open_company_folder(path):
