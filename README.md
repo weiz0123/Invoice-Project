@@ -16,6 +16,10 @@ ________________________________________________________________________________
 
 7. connection between UI and Function
 8. Update_Access is able to detect added path, and add in company manager for newly added folder
+
+9. general plan for Ui and data management connection
+10. disccusion about combinning data managmement and UI
+
 ___________________________________________________________________________________________________________________________________________________________________________________
 ## 2023-11-08 (init)
 1. followinng link is an recommandation for documentation techniques
