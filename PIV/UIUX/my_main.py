@@ -13,7 +13,7 @@ if __name__ == "__main__":
     initialize_file_explorer(ui, path)
     initialize_search_box(ui)
     triggered_tools(ui, path)
-    show_status(ui, 1, 1)
+    update_status(ui, path)
 
     MainWindow.show()
     sys.exit(app.exec())
