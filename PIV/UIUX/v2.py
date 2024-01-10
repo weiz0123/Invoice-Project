@@ -37,6 +37,8 @@ class Ui_MainWindow(object):
         self.Extraction_GridLayout.setSizeConstraint(QtWidgets.QLayout.SetFixedSize)
         self.Extraction_GridLayout.setObjectName("Extraction_GridLayout")
         self.Matplot_VLayout = QtWidgets.QVBoxLayout()
+        self.Matplot_VLayout.setSizeConstraint(QtWidgets.QLayout.SetFixedSize)
+        self.Matplot_VLayout.setContentsMargins(70, 0, 70, 0)
         self.Matplot_VLayout.setObjectName("Matplot_VLayout")
         self.Extraction_GridLayout.addLayout(self.Matplot_VLayout, 0, 2, 6, 5)
         self.process_button = QtWidgets.QPushButton(self.tab)
@@ -232,6 +234,7 @@ class Ui_MainWindow(object):
         self.toolBar.addAction(self.actionzoom)
         self.toolBar.addAction(self.actionselection_box)
         self.toolBar.addAction(self.actionAdd_category)
+
         self.retranslateUi(MainWindow)
         self.Tab_Widget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -273,4 +276,5 @@ class Ui_MainWindow(object):
         self.actionselection_box.setText(_translate("MainWindow", "selection_box"))
         self.actionAdd_category.setText(_translate("MainWindow", "Add category"))
         self.actionrefresh.setText(_translate("MainWindow", "refresh"))
+
 import resources_rc
